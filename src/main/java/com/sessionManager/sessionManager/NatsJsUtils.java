@@ -156,7 +156,8 @@ public class NatsJsUtils {
                     .subject(subject)
                     .data(data.getBytes(StandardCharsets.US_ASCII))
                     .build();
-            js.publish(msg);
+            //js.publish(msg);
+            js.publishAsync(msg);
         }
         if (verbose) {
             System.out.println(" <-");

@@ -1,0 +1,15 @@
+version: "3"
+services:
+  mongo-database:
+    container_name: mongo-database-session
+    image: mongo:latest
+    ports:
+      - 27021:27017
+
+  nats:
+   image: nats:latest
+   ports:
+     - 4221:4222
+   command:
+     - -js
+     
