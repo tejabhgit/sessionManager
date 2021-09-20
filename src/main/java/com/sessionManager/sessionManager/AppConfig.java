@@ -36,7 +36,7 @@ public class AppConfig {
 			String subjectWild = subjectPrefix + ".*";
 			String subjectA = subjectPrefix + ".A";
 			String subjectB = subjectPrefix + ".B";
-			try (Connection nc = Nats.connect("nats://localhost:4222")) {
+			try (Connection nc = Nats.connect("nats://localhost:4221")) {
 
 				JetStreamManagement jsm = nc.jetStreamManagement();
 

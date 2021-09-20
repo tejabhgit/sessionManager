@@ -1,3 +1,3 @@
 FROM adoptopenjdk/openjdk8:alpine-jre
-ADD target/session-manager.jar session-manager.jar
-ENTRYPOINT ["java","-jar","session-manager.jar"]
+ADD target/svc-rps-support-session.jar svc-rps-support-session.jar
+ENTRYPOINT ["java","-jar","svc-rps-support-session.jar"]
