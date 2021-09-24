@@ -1,0 +1,52 @@
+server:
+  port: 8090
+grpc:
+  server:
+    port: 9091
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
+  metrics:
+    export:
+      atlas:
+        enabled: false
+  security:
+    enabled: false
+
+spring:
+  application:
+    name: svc-rps-support-session
+  data:
+    mongo-database:
+      host: localhost
+      port: 27017
+      auto-index-creation: true
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: dataOut
+          binder: nats1
+      binders:
+        nats1:
+          type: nats
+          environment:
+            nats:
+              spring:
+                cloud:
+                  stream:
+                    binder:
+                      server: nats://localhost:4222
+
+logging:
+  level:
+    org.springframework: ERROR
+    com.sessionManager.sessionManager: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file: app.log
