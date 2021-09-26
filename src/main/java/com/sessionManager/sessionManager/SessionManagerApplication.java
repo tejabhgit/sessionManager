@@ -1,6 +1,7 @@
 package com.sessionManager.sessionManager;
 
-import com.sessionManager.sessionManager.nats.Listener;
+
+
 import com.sessionManager.sessionManager.nats.MessageResource;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -11,12 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
-
+import java.util.function.Consumer;
+//import java.util.function.
 import javax.xml.transform.Source;
-
+import org.springframework.messaging.Message;
 
 @Slf4j
-@EnableBinding(Sink.class)
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "svc-rps-support-session API", version = "2.0", description = "Support Session Information"))
 public class SessionManagerApplication {
@@ -26,8 +27,9 @@ public class SessionManagerApplication {
 	}
 
 	@Bean
-	public Listener schedulerRunner() {
-		return new Listener();
-	}
-
+    public Consumer<Message<String>> notificationEventSupplier() {
+		return msg -> {
+	         System.out.println(msg);
+	      };
+ }
 }
