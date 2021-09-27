@@ -1,4 +1,4 @@
-package com.sessionManager.sessionManager;
+package com.hp.sessionmanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sessionManager.sessionManager.nats;
+package com.hp.sessionmanager.nats;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,7 +22,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 
-@EnableBinding(Sink.class)
+/*@EnableBinding(Sink.class)
 public class Listener {
 	private static final Log logger = LogFactory.getLog(Listener.class);
 
@@ -30,4 +30,4 @@ public class Listener {
 	public void handle(MessageResource message) {
 		logger.info("received message " + message);
 	}
-}
+}*/

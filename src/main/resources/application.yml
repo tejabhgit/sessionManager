@@ -25,19 +25,12 @@ spring:
       host: localhost
       port: 27017
       auto-index-creation: true
-    
   cloud:
-##    function:
-##      definition: notificationEventSupplier
     stream:
-##      source: notificationEventSupplier
       bindings:
         notificationEventSupplier-in-0:
           destination: notification-events
           binder: nats1
-##        output:
-##          destination: dataOut
-##          binder: nats1
       binders:
         nats1:
           type: nats
@@ -48,7 +41,6 @@ spring:
                   stream:
                     binder:
                       server: nats://localhost:4222
-
 logging:
   level:
     org.springframework: ERROR

@@ -1,4 +1,4 @@
-package com.sessionManager.sessionManager.nats;
+package com.hp.sessionmanager.nats;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
