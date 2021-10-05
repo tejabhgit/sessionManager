@@ -1,0 +1,118 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package com.example.grpc.server.grpcserver;
+
+message GetTicketByIdRequest {
+  string id = 1;
+
+}
+
+message CurrentAgentGrpc {
+  string userId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string gravatar = 4;
+}
+
+message CategoryGrpc {
+  string name = 1;
+  string description = 2;
+}
+
+message DeviceGrpc {
+  string deviceId = 1;
+  string hostname = 2;
+  string state = 3;
+  string os = 4;
+}
+
+message TicketContentGrpc {
+  CurrentAgentGrpc currentAgent = 1;
+  CategoryGrpc Category = 2;
+  DeviceGrpc device = 3;
+  string id = 4;
+  string issueOpened = 5;
+  string issueClosed = 6;
+  string state = 7;
+  string description = 8;
+  MetaInfoGrpc metaInfo = 9;
+  string supportTicketId = 10;
+  string openTraceId = 11;
+  string spanId = 12;
+}
+
+message PageableGrpc {
+  bool last = 1;
+  int64 totalElements = 2;
+  int64 totalPages = 3;
+  int64 numberOfElements = 4;
+  bool first = 5;
+  int64 number = 6;
+  bool empty = 7;
+}
+
+message GetTicketByIdResponse {
+  string id = 1;
+  TicketContentGrpc ticket = 2;
+}
+
+message AddTicketRequest {
+  string deviceId = 1;
+  string category = 2;
+  string description = 3;
+}
+
+message AddTicketResponse {
+  int32 responseId = 1;
+}
+
+message DeleteTicketRequest {
+  string id = 1;
+}
+
+message DeleteTicketResponse {
+  string response = 1;
+}
+
+message FindAllTicketsRequest {
+  int32 page = 1;
+  int32 size = 2;
+  string sortBy = 3;
+  string direction = 4;
+}
+
+message FindAllTicketsResponse {
+  TicketContentGrpc ticket = 1;
+  PageableGrpc pageableGrpc = 2;
+}
+
+message MetaInfoGrpc {
+   string version = 1;
+   string createdDate = 2;
+   string UpdatedDate = 3;
+   string deletedDate = 4;
+}
+
+service TicketService {
+  rpc findAllTickets(FindAllTicketsRequest) returns (stream FindAllTicketsResponse);
+  rpc getTicketById(GetTicketByIdRequest) returns (GetTicketByIdResponse);
+  rpc addTicket(AddTicketRequest) returns (AddTicketResponse);
+  rpc deleteTicket(DeleteTicketRequest) returns (DeleteTicketResponse);
+  rpc loginRequest(LoginRequest) returns (APIResponse);
+}
+
+
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message APIResponse {
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+
+message Empty {
+}

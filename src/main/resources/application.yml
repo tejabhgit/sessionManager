@@ -26,21 +26,29 @@ spring:
       port: 27017
       auto-index-creation: true
   cloud:
+    function:
+      definition: stringSupplier;toUpperCase;stringLogger
     stream:
+      poller:
+        fixed-delay: 10000
       bindings:
-        notificationEventSupplier-in-0:
-          destination: notification-events
-          binder: nats1
-      binders:
-        nats1:
-          type: nats
-          environment:
-            nats:
-              spring:
-                cloud:
-                  stream:
-                    binder:
-                      server: nats://localhost:4222
+        stringSupplier-out-0:
+          destination: strings-topic
+          binder: nats
+        toUpperCase-in-0:
+          destination: strings-topic
+          binder: nats
+        stringLogger-in-0:
+          destination: logger-topic
+          binder: nats
+        toUpperCase-out-0:
+          destination: logger-topic
+          binder: nats
+
+nats:
+  spring:
+    server: nats://localhost:4222
+
 logging:
   level:
     org.springframework: ERROR
@@ -49,3 +57,12 @@ logging:
     console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
     file: "%d %p %c{1.} [%t] %m%n"
   file: app.log
+
+#opentracing:
+#  jaeger:
+#    service-name: svc-rps-support-session
+#    enabled: TRUE
+#    udp-sender:
+#      host: jaeger
+#    http-sender:
+#      url: http://localhost:14268/api/traces
